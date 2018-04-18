@@ -25,8 +25,8 @@ public interface ProfileDao {
     @Query("SELECT * FROM ProfileEntity WHERE user_id LIKE :userID")
     ProfileEntity getByID(int userID);
 
-    @Query("SELECT * FROM SongEnt WHERE firstName LIKE :firstName AND " + "lastName LIKE :lastName LIMIT 1")
-    ProfileEntity findByName(String songName, String artistName);
+    @Query("SELECT * FROM ProfileEntity WHERE firstName LIKE :firstName AND " + "lastName LIKE :lastName LIMIT 1")
+    ProfileEntity findByName(String firstName, String lastName);
 
     @Insert
     void insertAll(ProfileEntity... profileEntities);
