@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.demo.csc214.socialmediaapp.view.LoginActivity"
+    tools:context="com.demo.csc214.socialmediaapp.view.CreateAccountActivity"
     android:gravity="center">
 
     <LinearLayout
@@ -15,14 +15,21 @@
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/username_login_edit_text"
+            android:id="@+id/email_create_edit_text"
+            android:hint="@string/email_address"
+            android:width="@dimen/username_field_width"
+            android:gravity="center"/>
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/username_create_edit_text"
             android:hint="@string/username"
             android:width="@dimen/username_field_width"
             android:gravity="center"/>
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/password_login_edit_text"
+            android:id="@+id/password_create_edit_text"
             android:hint="@string/password"
             android:width="@dimen/username_field_width"
             android:gravity="center"
@@ -31,7 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/new_account"
-            android:id="@+id/login_button_login_activity"/>
+            android:id="@+id/new_button_create_activity"/>
     </LinearLayout>
 
 </RelativeLayout>

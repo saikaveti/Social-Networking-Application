@@ -7,16 +7,30 @@ import android.view.View;
 import android.widget.Button;
 
 import com.demo.csc214.socialmediaapp.R;
+import com.demo.csc214.socialmediaapp.model.Database.FollowerDatabase;
+import com.demo.csc214.socialmediaapp.model.Database.PostDatabase;
+import com.demo.csc214.socialmediaapp.model.Database.ProfileDatabase;
+import com.demo.csc214.socialmediaapp.model.Database.UserDatabase;
 
 public class MainActivity extends AppCompatActivity {
 
     Button mNewAccountButton;
     Button mLoginButton;
 
+    UserDatabase userDB;
+    ProfileDatabase profileDB;
+    PostDatabase postDB;
+    FollowerDatabase followDB;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        userDB = UserDatabase.getInstance(this);
+        profileDB = ProfileDatabase.getInstance(this);
+        postDB = PostDatabase.getInstance(this);
+        followDB = FollowerDatabase.getInstance(this);
 
         mNewAccountButton = findViewById(R.id.new_account_button);
 
@@ -25,7 +39,8 @@ public class MainActivity extends AppCompatActivity {
         mNewAccountButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(MainActivity.this, CreateAccountActivity.class);
+                startActivity(intent);
             }
         });
 
