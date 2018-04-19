@@ -21,7 +21,7 @@ public interface FollowDAO {
     List<FollowerEntity> getAll();
 
     @Query("SELECT * FROM FollowerEntity WHERE user_id IN (:userIds)")
-    List<ProfileEntity> loadALLByIds(int[] userIds);
+    List<FollowerEntity> loadALLByIds(int[] userIds);
 
     @Query("SELECT * FROM FollowerEntity WHERE user_id LIKE :userID")
     FollowerEntity getByID(int userID);
