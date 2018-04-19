@@ -25,15 +25,15 @@ public interface ProfileDao {
     @Query("SELECT * FROM ProfileEntity WHERE user_id LIKE :userID")
     ProfileEntity getByID(int userID);
 
-    @Query("SELECT * FROM ProfileEntity WHERE firstName LIKE :firstName AND " + "lastName LIKE :lastName LIMIT 1")
-    ProfileEntity findByName(String firstName, String lastName);
+    @Query("SELECT * FROM ProfileEntity WHERE lastName LIKE :lastName AND " + "birthDate LIKE :birthDate LIMIT 1")
+    ProfileEntity findByNameDOB(String lastName, String birthDate);
 
     @Insert
     void insertAll(ProfileEntity... profileEntities);
 
 
     @Delete
-    void delete(ProfileEntity songEnt);
+    void delete(ProfileEntity profileEntity);
 
     //Deletes Table
     @Query("DELETE FROM ProfileEntity")

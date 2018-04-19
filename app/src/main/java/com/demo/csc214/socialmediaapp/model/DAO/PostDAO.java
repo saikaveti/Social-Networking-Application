@@ -19,23 +19,23 @@ public interface PostDAO {
     @Query("SELECT * FROM PostEntity")
     List<PostEntity> getAll();
 
-    @Query("SELECT * FROM SongEnt WHERE user_id IN (:userIds)")
-    List<SongEnt> loadALLByIds(int[] userIds);
+    @Query("SELECT * FROM PostEntity WHERE post_id IN (:postIds)")
+    List<PostEntity> loadALLByIds(int[] postIds);
 
-    @Query("SELECT * FROM SongENT WHERE uid LIKE :userID")
-    SongEnt getByID(int userID);
+    @Query("SELECT * FROM PostEntity WHERE post_id LIKE :postID")
+    PostEntity getByID(int postID);
 
-    @Query("SELECT * FROM SongEnt WHERE name LIKE :songName AND " + "artist LIKE :artistName LIMIT 1")
-    SongEnt findByName(String songName, String artistName);
+    @Query("SELECT * FROM PostEntity WHERE user_id LIKE :userID")
+    List<PostEntity> findByUserID(int userID);
 
     @Insert
-    void insertAll(SongEnt... songEnts);
+    void insertAll(PostEntity... postEntities);
 
 
     @Delete
-    void delete(SongEnt songEnt);
+    void delete(PostEntity postEntity);
 
     //Deletes Table
-    @Query("DELETE FROM SongEnt")
+    @Query("DELETE FROM PostEntity")
     void nukeTable();
 }

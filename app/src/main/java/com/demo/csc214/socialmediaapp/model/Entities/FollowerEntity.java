@@ -11,7 +11,10 @@ import android.arch.persistence.room.PrimaryKey;
 @Entity
 public class FollowerEntity {
 
-    @PrimaryKey(autoGenerate = false)
+    @PrimaryKey(autoGenerate = true)
+    private int follower_id;
+
+    @ColumnInfo(name = "user_id")
     private int user_id;
 
     @ColumnInfo(name = "id_followed")
@@ -31,5 +34,13 @@ public class FollowerEntity {
 
     public void setId_followed(int id_followed) {
         this.id_followed = id_followed;
+    }
+
+    public int getFollower_id() {
+        return follower_id;
+    }
+
+    public void setFollower_id(int follower_id) {
+        this.follower_id = follower_id;
     }
 }

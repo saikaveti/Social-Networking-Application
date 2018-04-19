@@ -11,7 +11,11 @@ import android.arch.persistence.room.PrimaryKey;
 @Entity
 public class PostEntity {
 
-    @PrimaryKey(autoGenerate = false)
+
+    @PrimaryKey(autoGenerate = true)
+    private int post_id;
+
+    @ColumnInfo(name = "user_id")
     private int user_id;
 
     @ColumnInfo(name = "postURL")
@@ -25,6 +29,15 @@ public class PostEntity {
 
     @ColumnInfo(name = "postDate")
     private String postDate;
+
+
+    public int getPost_id() {
+        return post_id;
+    }
+
+    public void setPost_id(int post_id) {
+        this.post_id = post_id;
+    }
 
     public int getUser_id() {
         return user_id;

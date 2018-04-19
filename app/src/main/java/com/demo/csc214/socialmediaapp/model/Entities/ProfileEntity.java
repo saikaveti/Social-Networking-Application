@@ -10,7 +10,13 @@ import android.arch.persistence.room.PrimaryKey;
 
 @Entity
 public class ProfileEntity {
-    @PrimaryKey(autoGenerate = false)
+
+
+
+    @PrimaryKey(autoGenerate = true)
+    private int profile_id;
+
+    @ColumnInfo(name = "user_id")
     private int user_id;
 
     @ColumnInfo(name = "firstName")
@@ -33,6 +39,14 @@ public class ProfileEntity {
 
     @ColumnInfo(name = "totalFollowers")
     private int totalFollowers;
+
+    public int getProfile_id() {
+        return profile_id;
+    }
+
+    public void setProfile_id(int profile_id) {
+        this.profile_id = profile_id;
+    }
 
     public int getUser_id() {
         return user_id;

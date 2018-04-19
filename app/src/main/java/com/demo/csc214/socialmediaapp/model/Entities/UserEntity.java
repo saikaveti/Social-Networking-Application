@@ -11,6 +11,7 @@ import android.arch.persistence.room.PrimaryKey;
 
 @Entity
 public class UserEntity {
+
     @PrimaryKey(autoGenerate = false)
     private int user_id;
 
