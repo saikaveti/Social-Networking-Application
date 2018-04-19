@@ -19,5 +19,13 @@
     <string name="username">Username</string>
     <string name="email_address">Email Address</string>
     <string name="password">Password</string>
+    <string name="photo">Photo</string>
+    <string name="click_on_image_to_change">(Click to Change)</string>
+    <string name="birthdate">Birthdate</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="create_profile">Create Profile</string>
+    <string name="bio_here">Bio Here</string>
+    <string name="hometown">Hometown</string>
     -
 </resources>
