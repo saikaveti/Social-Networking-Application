@@ -37,7 +37,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (!CheckLoginInputs.validUserName(mUsernameField, UserDatabase.getInstance(getApplicationContext()))) {
                     Toast.makeText(getApplicationContext(), "USERNAME INVALID", Toast.LENGTH_SHORT).show();
-                } else if (!CheckLoginInputs.validAccount(mUsernameField, mPasswordField, UserDatabase.getInstance(getApplicationContext()))) {
+                }  else if (!CheckLoginInputs.validAccount(mUsernameField, mPasswordField, UserDatabase.getInstance(getApplicationContext()))) {
                     Toast.makeText(getApplicationContext(), "USERNAME AND PASSWORD DO NOT MATCH", Toast.LENGTH_SHORT).show();
                 } else {
                     int user_id = CheckLoginInputs.getUserID(mUsernameField, mPasswordField, UserDatabase.getInstance(getApplicationContext()));

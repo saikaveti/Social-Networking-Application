@@ -10,6 +10,8 @@ import android.widget.Toast;
 
 import com.demo.csc214.socialmediaapp.R;
 import com.demo.csc214.socialmediaapp.controller.CheckCreateAccountInputs;
+import com.demo.csc214.socialmediaapp.controller.CheckCreateProfileElements;
+import com.demo.csc214.socialmediaapp.controller.CheckLoginInputs;
 import com.demo.csc214.socialmediaapp.model.Database.UserDatabase;
 import com.demo.csc214.socialmediaapp.model.Entities.UserEntity;
 
@@ -46,8 +48,12 @@ public class CreateAccountActivity extends AppCompatActivity {
 
                 boolean validUsername = CheckCreateAccountInputs.checkValidUsername(mUserNameField, userDatabase);
 
+                boolean emailNotExists = CheckCreateAccountInputs.checkEmailExists(mEmailField, userDatabase);
+
                 if (!validEmail) {
                     Toast.makeText(getApplicationContext(), "Invalid E-mail", Toast.LENGTH_SHORT).show();
+                } else if (!emailNotExists) {
+                    Toast.makeText(getApplicationContext(), "Email Already Registered!", Toast.LENGTH_SHORT).show();
                 } else if (!validUsername) {
                     Toast.makeText(getApplicationContext(), "Username Already Exists!", Toast.LENGTH_SHORT).show();
                 } else {

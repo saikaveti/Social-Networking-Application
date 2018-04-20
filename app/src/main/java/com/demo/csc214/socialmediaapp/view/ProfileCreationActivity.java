@@ -1,6 +1,12 @@
 package com.demo.csc214.socialmediaapp.view;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.Environment;
+import android.os.StrictMode;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.demo.csc214.socialmediaapp.R;
@@ -18,7 +25,9 @@ import com.demo.csc214.socialmediaapp.model.Entities.ProfileEntity;
 import com.demo.csc214.socialmediaapp.model.Entities.UserEntity;
 import com.demo.csc214.socialmediaapp.model.Profile.Profile;
 
+import java.io.File;
 import java.util.List;
+import java.util.UUID;
 
 public class ProfileCreationActivity extends AppCompatActivity {
 
@@ -34,6 +43,10 @@ public class ProfileCreationActivity extends AppCompatActivity {
     EditText mBio;
 
     Button mCreateButton;
+
+    String currentImageFile = "standard_pig.jpg";
+
+    File mPhotoFile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,20 +68,45 @@ public class ProfileCreationActivity extends AppCompatActivity {
 
         mCreateButton = findViewById(R.id.create_profile_button_activity);
 
+        //Source: Powerpoint Slides
+        mProfilePicture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
+
+                StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+                StrictMode.setVmPolicy(builder.build());
+
+                currentImageFile = "IMG_" + UUID.randomUUID().toString() + ".jpg";
+
+                File picturesDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+
+                mPhotoFile = new File(picturesDir, currentImageFile);
+
+                Uri photoUri = Uri.fromFile(mPhotoFile);
+
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
+
+                startActivityForResult(intent, 0);
+            }
+        });
+
         mCreateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (!CheckCreateProfileElements.checkEmptyFields(mFirstNameBox, mLastNameBox, mBirthdateBox, mHometownBox, mBio)) {
                     Toast.makeText(getApplicationContext(), "At Least One Field Empty", Toast.LENGTH_SHORT).show();
-                } else if (!CheckCreateProfileElements.checkImageChanged(mProfilePicture)) {
-                    Toast.makeText(getApplicationContext(), "Profile Picture Unchanged", Toast.LENGTH_SHORT).show();
-                } else if (!CheckCreateProfileElements.checkDateValid(mBirthdateBox)) {
+                } //else if (!CheckCreateProfileElements.checkImageChanged(mProfilePicture)) {
+                    //Toast.makeText(getApplicationContext(), "Profile Picture Unchanged", Toast.LENGTH_SHORT).show();
+                //}
+                else if (!CheckCreateProfileElements.checkDateValid(mBirthdateBox)) {
                     Toast.makeText(getApplicationContext(), "Invalid Date", Toast.LENGTH_SHORT).show();
                 } else {
                     ProfileEntity profileEntity = new ProfileEntity();
-                    profileEntity.setUser_id(user_id);
 
-                    //profileEntity.setProfilePhoto();
+                    profileEntity.setUser_id(user_id);
+                    profileEntity.setProfilePhoto(currentImageFile);
 
 
                     String[] values = CheckCreateProfileElements.getValuesFromBoxes(mFirstNameBox, mLastNameBox, mBirthdateBox, mHometownBox, mBio);
@@ -90,7 +128,41 @@ public class ProfileCreationActivity extends AppCompatActivity {
             }
         });
 
-
-
     }
+
+    //Source: Lecture Slides
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Bitmap photo = getScaledBitmap(mPhotoFile.getPath(), mProfilePicture.getWidth(), mProfilePicture.getHeight());
+
+        mProfilePicture.setImageBitmap(photo);
+
+        mProfilePicture.setScaleType(ImageButton.ScaleType.CENTER_CROP);
+    }
+
+    //Source: Lecture Slides
+    public static Bitmap getScaledBitmap(String path, int width, int height) {
+        BitmapFactory.Options options =
+                new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        BitmapFactory.decodeFile(path, options);
+
+        float srcWidth = options.outWidth;
+        float srcHeight = options.outHeight;
+        int sampleSize = 1;
+        if(srcHeight > height || srcWidth > width ) {
+            if(srcWidth > srcHeight) {
+                sampleSize = Math.round(srcHeight / height);
+            }
+            else {
+                sampleSize = Math.round(srcWidth / width);
+            }
+        }
+        BitmapFactory.Options scaledOptions =
+                new BitmapFactory.Options();
+        scaledOptions.inSampleSize = sampleSize;
+
+        return BitmapFactory.decodeFile(path, scaledOptions);
+    }
+
 }

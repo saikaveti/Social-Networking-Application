@@ -24,6 +24,20 @@ public class CheckCreateAccountInputs {
         return matcher.matches();
     }
 
+    public static boolean checkEmailExists(EditText emailField, UserDatabase db) {
+        if (db.userDAO().getAll().size() == 0) {
+            return true;
+        } else {
+            List<UserEntity> list = db.userDAO().getAll();
+            for (UserEntity user : list) {
+                if (user.getEmail().equals(emailField.getText().toString())) {
+                    return false;
+                }
+            }
+            return true;
+        }
+    }
+
     public static boolean checkValidUsername(EditText usernameField, UserDatabase db) {
         if (db.userDAO().getAll().size() == 0) {
             return true;

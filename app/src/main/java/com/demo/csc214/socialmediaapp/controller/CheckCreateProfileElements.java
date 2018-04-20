@@ -24,6 +24,7 @@ public class CheckCreateProfileElements {
         }
     }
 
+    /*
     public static boolean checkImageChanged(ImageButton imageButton) {
         Integer resource = (Integer) imageButton.getTag();
 
@@ -33,6 +34,7 @@ public class CheckCreateProfileElements {
             return true;
         }
     }
+    */
 
     //Source: https://stackoverflow.com/questions/11480542/fastest-way-to-tell-if-a-string-is-a-valid-date
     public static void dateBuilder() {
