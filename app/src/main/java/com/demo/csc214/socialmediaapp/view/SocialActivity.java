@@ -1,5 +1,6 @@
 package com.demo.csc214.socialmediaapp.view;
 
+import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -76,27 +77,26 @@ public class SocialActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+    //Source: https://www.youtube.com/watch?v=ju837bQOBfg
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        FragmentManager fragmentManager = getFragmentManager();
 
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        if (id == R.id.nav_news_feed) {
+            fragmentManager.beginTransaction().replace(R.id.content_frame, new NewsFeedFragment()).commit();
+        } else if (id == R.id.nav_list_users) {
+            fragmentManager.beginTransaction().replace(R.id.content_frame, new ListUsersFragment()).commit();
+        } else if (id == R.id.nav_edit_profile) {
+            fragmentManager.beginTransaction().replace(R.id.content_frame, new EditProfileFragment()).commit();
+        } else if (id == R.id.nav_create_post) {
+            fragmentManager.beginTransaction().replace(R.id.content_frame, new CreatePostFragment()).commit();
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
