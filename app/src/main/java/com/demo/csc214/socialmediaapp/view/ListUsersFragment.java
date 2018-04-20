@@ -1,8 +1,9 @@
 package com.demo.csc214.socialmediaapp.view;
 
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +14,7 @@ import com.demo.csc214.socialmediaapp.R;
  * Created by Sailesh on 4/20/18.
  */
 
-public class ListUsersFragment extends Fragment{
+public class ListUsersFragment extends ListFragment{
 
     View view;
 

@@ -1,6 +1,8 @@
 package com.demo.csc214.socialmediaapp.view;
 
-import android.app.FragmentManager;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -94,7 +96,7 @@ public class SocialActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        FragmentManager fragmentManager = getFragmentManager();
+        FragmentManager fragmentManager = getSupportFragmentManager();
 
         Bundle bundle = new Bundle();
         bundle.putInt(USERID_KEY, user_id);

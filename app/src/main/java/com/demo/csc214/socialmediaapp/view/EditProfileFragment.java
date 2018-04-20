@@ -1,6 +1,6 @@
 package com.demo.csc214.socialmediaapp.view;
 
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.arch.persistence.room.Database;
 import android.content.Intent;
 import android.graphics.Bitmap;
