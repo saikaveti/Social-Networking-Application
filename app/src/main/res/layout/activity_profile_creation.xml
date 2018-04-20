@@ -28,7 +28,7 @@
                     android:id="@+id/image_create_profile"
                     android:layout_width="150dp"
                     android:layout_height="200dp"
-                    />
+                    android:background="@drawable/standard_pic"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -61,11 +61,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/birthdate_name_create_profile"
+                    android:textSize="13dp"
                     android:hint="@string/birthdate"/>
                 <EditText
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/Hometown_name_create_profile"
+                    android:id="@+id/hometown_name_create_profile"
                     android:hint="@string/hometown"/>
 
 
@@ -87,7 +88,8 @@
             android:maxLines="6"
             android:minLines="6"
             android:scrollbars="vertical"
-            android:layout_marginBottom="20dp"/>
+            android:layout_marginBottom="20dp"
+            android:id="@+id/bio_create_profile_text"/>
 
         <Button
             android:layout_gravity="center"

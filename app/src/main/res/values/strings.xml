@@ -21,11 +21,17 @@
     <string name="password">Password</string>
     <string name="photo">Photo</string>
     <string name="click_on_image_to_change">(Click to Change)</string>
-    <string name="birthdate">Birthdate</string>
+    <string name="birthdate">Birthdate (MM/DD/YYYY)</string>
     <string name="first_name">First Name</string>
     <string name="last_name">Last Name</string>
     <string name="create_profile">Create Profile</string>
     <string name="bio_here">Bio Here</string>
     <string name="hometown">Hometown</string>
+    <string name="title_activity_social">SocialActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
     -
 </resources>

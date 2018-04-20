@@ -23,7 +23,11 @@
         </activity>
         <activity android:name=".view.LoginActivity" />
         <activity android:name=".view.CreateAccountActivity" />
-        <activity android:name=".view.ProfileCreationActivity"></activity>
+        <activity android:name=".view.ProfileCreationActivity" />
+        <activity
+            android:name=".view.SocialActivity"
+            android:label="@string/title_activity_social"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

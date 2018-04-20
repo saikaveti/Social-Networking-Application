@@ -4,13 +4,19 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.demo.csc214.socialmediaapp.R;
+import com.demo.csc214.socialmediaapp.controller.CheckCreateProfileElements;
+import com.demo.csc214.socialmediaapp.model.Database.ProfileDatabase;
 import com.demo.csc214.socialmediaapp.model.Database.UserDatabase;
+import com.demo.csc214.socialmediaapp.model.Entities.ProfileEntity;
 import com.demo.csc214.socialmediaapp.model.Entities.UserEntity;
+import com.demo.csc214.socialmediaapp.model.Profile.Profile;
 
 import java.util.List;
 
@@ -36,9 +42,53 @@ public class ProfileCreationActivity extends AppCompatActivity {
 
         Intent profileID = getIntent();
 
-        int user_id = profileID.getIntExtra(USERID_KEY, 0);
+        final int user_id = profileID.getIntExtra(USERID_KEY, 0);
 
         mProfilePicture = findViewById(R.id.image_create_profile);
+
+        mFirstNameBox = findViewById(R.id.first_name_create_profile);
+        mLastNameBox = findViewById(R.id.last_name_create_profile);
+        mBirthdateBox = findViewById(R.id.birthdate_name_create_profile);
+        mHometownBox = findViewById(R.id.hometown_name_create_profile);
+
+        mBio = findViewById(R.id.bio_create_profile_text);
+
+        mCreateButton = findViewById(R.id.create_profile_button_activity);
+
+        mCreateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!CheckCreateProfileElements.checkEmptyFields(mFirstNameBox, mLastNameBox, mBirthdateBox, mHometownBox, mBio)) {
+                    Toast.makeText(getApplicationContext(), "At Least One Field Empty", Toast.LENGTH_SHORT).show();
+                } else if (!CheckCreateProfileElements.checkImageChanged(mProfilePicture)) {
+                    Toast.makeText(getApplicationContext(), "Profile Picture Unchanged", Toast.LENGTH_SHORT).show();
+                } else if (!CheckCreateProfileElements.checkDateValid(mBirthdateBox)) {
+                    Toast.makeText(getApplicationContext(), "Invalid Date", Toast.LENGTH_SHORT).show();
+                } else {
+                    ProfileEntity profileEntity = new ProfileEntity();
+                    profileEntity.setUser_id(user_id);
+
+                    //profileEntity.setProfilePhoto();
+
+
+                    String[] values = CheckCreateProfileElements.getValuesFromBoxes(mFirstNameBox, mLastNameBox, mBirthdateBox, mHometownBox, mBio);
+                    profileEntity.setFirstName(values[0]);
+                    profileEntity.setLastName(values[1]);
+                    profileEntity.setBirthDate(values[2]);
+                    profileEntity.setHometown(values[3]);
+                    profileEntity.setBio(values[4]);
+                    profileEntity.setTotalFollowers(0);
+
+                    ProfileDatabase.getInstance(getApplicationContext()).profileDao().insertAll(profileEntity);
+
+                    Intent myIntent = new Intent(ProfileCreationActivity.this, SocialActivity.class);
+                    myIntent.putExtra(USERID_KEY, user_id);
+
+                    startActivity(myIntent);
+
+                }
+            }
+        });
 
 
 
