@@ -1,6 +1,7 @@
 package com.demo.csc214.socialmediaapp.view;
 
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -19,12 +20,21 @@ import com.demo.csc214.socialmediaapp.R;
 public class SocialActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    int user_id;
+
+    public final String USERID_KEY = "USER_ID_KEY";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_social);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        Intent intent = getIntent();
+
+        user_id = intent.getIntExtra(USERID_KEY, 0);
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -86,14 +96,29 @@ public class SocialActivity extends AppCompatActivity
 
         FragmentManager fragmentManager = getFragmentManager();
 
+        Bundle bundle = new Bundle();
+        bundle.putInt(USERID_KEY, user_id);
+
         if (id == R.id.nav_news_feed) {
-            fragmentManager.beginTransaction().replace(R.id.content_frame, new NewsFeedFragment()).commit();
+            NewsFeedFragment newsFragment = new NewsFeedFragment();
+            newsFragment.setArguments(bundle);
+
+            fragmentManager.beginTransaction().replace(R.id.content_frame, newsFragment).commit();
         } else if (id == R.id.nav_list_users) {
-            fragmentManager.beginTransaction().replace(R.id.content_frame, new ListUsersFragment()).commit();
+            ListUsersFragment usersFragment = new ListUsersFragment();
+            usersFragment.setArguments(bundle);
+
+            fragmentManager.beginTransaction().replace(R.id.content_frame, usersFragment).commit();
         } else if (id == R.id.nav_edit_profile) {
-            fragmentManager.beginTransaction().replace(R.id.content_frame, new EditProfileFragment()).commit();
+            EditProfileFragment profileFragment = new EditProfileFragment();
+            profileFragment.setArguments(bundle);
+
+            fragmentManager.beginTransaction().replace(R.id.content_frame, profileFragment).commit();
         } else if (id == R.id.nav_create_post) {
-            fragmentManager.beginTransaction().replace(R.id.content_frame, new CreatePostFragment()).commit();
+            CreatePostFragment postFragment = new CreatePostFragment();
+            postFragment.setArguments(bundle);
+
+            fragmentManager.beginTransaction().replace(R.id.content_frame, postFragment).commit();
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

@@ -3,10 +3,50 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Post Created Here!"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:layout_width="150dp"
+                android:layout_height="200dp"
+                android:id="@+id/image_button_post"
+                android:background="@drawable/standard_pic"/>
+
+            <EditText
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:hint="@string/bio_here"
+                android:inputType="textMultiLine"
+                android:lines="5"
+                android:maxLines="6"
+                android:minLines="6"
+                android:scrollbars="vertical"
+                android:layout_marginBottom="20dp"
+                android:id="@+id/post_text_profile_text"/>
+        </LinearLayout>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/url_field"
+            android:hint=""/>
+
+    </LinearLayout>
+
+
+
+
+
+
 
 
 </LinearLayout>

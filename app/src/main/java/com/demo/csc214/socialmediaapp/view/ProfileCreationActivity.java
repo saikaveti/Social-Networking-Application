@@ -122,6 +122,8 @@ public class ProfileCreationActivity extends AppCompatActivity {
                     Intent myIntent = new Intent(ProfileCreationActivity.this, SocialActivity.class);
                     myIntent.putExtra(USERID_KEY, user_id);
 
+                    Toast.makeText(getApplicationContext(), "Profile Created!", Toast.LENGTH_SHORT).show();
+
                     startActivity(myIntent);
 
                 }
