@@ -34,6 +34,7 @@ public class CheckCreateProfileElements {
         }
     }
 
+    //Source: https://stackoverflow.com/questions/11480542/fastest-way-to-tell-if-a-string-is-a-valid-date
     public static void dateBuilder() {
 
             for (int year = 1900; year < 2050; year++) {
