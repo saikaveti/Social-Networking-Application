@@ -57,6 +57,8 @@ public class ProfileCreationActivity extends AppCompatActivity {
 
         final int user_id = profileID.getIntExtra(USERID_KEY, 0);
 
+        Log.i("Current ID Profile Create:", Integer.toString(user_id));
+
         mProfilePicture = findViewById(R.id.image_create_profile);
 
         mFirstNameBox = findViewById(R.id.first_name_create_profile);

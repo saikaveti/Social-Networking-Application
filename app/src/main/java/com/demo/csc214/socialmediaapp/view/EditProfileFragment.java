@@ -25,9 +25,12 @@ import com.demo.csc214.socialmediaapp.R;
 import com.demo.csc214.socialmediaapp.controller.CheckCreateProfileElements;
 import com.demo.csc214.socialmediaapp.controller.DatabaseQueriesHandler;
 import com.demo.csc214.socialmediaapp.model.Database.ProfileDatabase;
+import com.demo.csc214.socialmediaapp.model.Database.UserDatabase;
 import com.demo.csc214.socialmediaapp.model.Entities.ProfileEntity;
+import com.demo.csc214.socialmediaapp.model.Entities.UserEntity;
 
 import java.io.File;
+import java.util.Arrays;
 import java.util.UUID;
 
 /**
@@ -63,6 +66,7 @@ public class EditProfileFragment extends Fragment{
 
         if (getArguments() != null) {
             user_id = getArguments().getInt(USERID_KEY);
+            Log.i("Current User ID: ", Integer.toString(user_id));
         }
 
 
@@ -92,7 +96,12 @@ public class EditProfileFragment extends Fragment{
 
         String[] values = DatabaseQueriesHandler.getValuesProfileEdit(user_id, ProfileDatabase.getInstance(getContext()));
 
+        for (ProfileEntity entity : ProfileDatabase.getInstance(getContext()).profileDao().getAll()) {
+            Log.i("Current Database Profile", entity.getUser_id() + " " + entity.getFirstName() + " " + entity.getLastName());
+        }
+
         currentImageFile = values[0];
+        Log.i("Image: ", Arrays.toString(values));
         File picturesDir = getActivity().getApplication().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         mPhotoFile = new File(picturesDir, currentImageFile);
         Bitmap photo = getScaledBitmap(mPhotoFile.getPath(), 150, 200);

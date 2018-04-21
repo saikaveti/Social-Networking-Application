@@ -121,6 +121,9 @@ public class CreatePostFragment extends Fragment{
                     Toast.makeText(getContext(), "Posted!", Toast.LENGTH_SHORT).show();
 
                     Fragment fragment = new NewsFeedFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putInt(USERID_KEY, user_id);
+                    fragment.setArguments(bundle);
                     FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                     fragmentTransaction.replace(R.id.content_frame, fragment);

@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -37,6 +38,7 @@ public class SocialActivity extends AppCompatActivity
 
         user_id = intent.getIntExtra(USERID_KEY, 0);
 
+        Log.i("OnCreate ID", Integer.toString(user_id));
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -100,6 +102,8 @@ public class SocialActivity extends AppCompatActivity
 
         Bundle bundle = new Bundle();
         bundle.putInt(USERID_KEY, user_id);
+
+        Log.i("Current ID", Integer.toString(user_id));
 
         if (id == R.id.nav_news_feed) {
             NewsFeedFragment newsFragment = new NewsFeedFragment();

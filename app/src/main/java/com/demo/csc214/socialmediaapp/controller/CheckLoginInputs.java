@@ -39,6 +39,6 @@ public class CheckLoginInputs {
                 return user.getUser_id();
             }
         }
-        return 0;
+        return 10000;
     }
 }

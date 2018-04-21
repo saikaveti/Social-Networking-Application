@@ -3,6 +3,7 @@ package com.demo.csc214.socialmediaapp.view;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -41,6 +42,8 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "USERNAME AND PASSWORD DO NOT MATCH", Toast.LENGTH_SHORT).show();
                 } else {
                     int user_id = CheckLoginInputs.getUserID(mUsernameField, mPasswordField, UserDatabase.getInstance(getApplicationContext()));
+
+                    Log.i("Get ID", Integer.toString(user_id));
 
                     Intent myIntent = new Intent(LoginActivity.this, SocialActivity.class);
 
