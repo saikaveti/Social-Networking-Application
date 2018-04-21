@@ -26,13 +26,13 @@ public class ProfileList {
         }
     }
 
-    public void addProfile(int user_id, String firstName, String lastName, String birthDate, String profilePhoto, String hometown, String bio, int totalFollowers) {
-        Profile p = new Profile( user_id,  firstName,  lastName,  birthDate,  profilePhoto,  hometown,  bio,  totalFollowers);
+    public void addProfile(int user_id, String firstName, String lastName, String birthDate, String profilePhoto, String hometown, String bio) {
+        Profile p = new Profile( user_id,  firstName,  lastName,  birthDate,  profilePhoto,  hometown,  bio);
         profileList.add(p);
     }
 
-    public void deleteProfile(int user_id, String firstName, String lastName, String birthDate, String profilePhoto, String hometown, String bio, int totalFollowers) {
-        Profile profile = new Profile( user_id,  firstName,  lastName,  birthDate,  profilePhoto,  hometown,  bio,  totalFollowers);
+    public void deleteProfile(int user_id, String firstName, String lastName, String birthDate, String profilePhoto, String hometown, String bio) {
+        Profile profile = new Profile( user_id,  firstName,  lastName,  birthDate,  profilePhoto,  hometown,  bio);
         for (Profile p : profileList) {
             if (p.equals(profile)) {
                 profileList.remove(p);

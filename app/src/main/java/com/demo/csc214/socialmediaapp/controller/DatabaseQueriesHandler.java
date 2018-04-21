@@ -1,7 +1,14 @@
 package com.demo.csc214.socialmediaapp.controller;
 
+import com.demo.csc214.socialmediaapp.model.Database.PostDatabase;
 import com.demo.csc214.socialmediaapp.model.Database.ProfileDatabase;
+import com.demo.csc214.socialmediaapp.model.Entities.PostEntity;
 import com.demo.csc214.socialmediaapp.model.Entities.ProfileEntity;
+import com.demo.csc214.socialmediaapp.model.Post.Post;
+import com.demo.csc214.socialmediaapp.model.Profile.Profile;
+
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by Sailesh on 4/20/18.
@@ -33,5 +40,15 @@ public class DatabaseQueriesHandler {
         return null;
     }
 
+    public static List<Profile> getListOfProfile(ProfileDatabase db) {
+        List<Profile> list = new LinkedList<>();
+        for (ProfileEntity entity : db.profileDao().getAll()) {
+            Profile profile = new Profile(entity.getUser_id(), entity.getFirstName(), entity.getLastName(), entity.getBirthDate(), entity.getProfilePhoto(), entity.getHometown(), entity.getBio());
+            list.add(profile);
+        }
+
+        return list;
+
+    }
 
 }
