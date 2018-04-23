@@ -44,7 +44,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:hint="@string/bio_here"
+                android:hint="Post Here"
                 android:inputType="textMultiLine"
                 android:lines="5"
                 android:maxLines="10"

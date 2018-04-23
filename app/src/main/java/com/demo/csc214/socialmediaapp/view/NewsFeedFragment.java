@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.demo.csc214.socialmediaapp.R;
 import com.demo.csc214.socialmediaapp.controller.DatabaseQueriesHandler;
@@ -39,6 +40,7 @@ public class NewsFeedFragment  extends ListFragment{
     public final String USERID_KEY = "USER_ID_KEY";
 
     Button mButtonTop;
+    ListView listView;
 
 
     @Override
@@ -87,23 +89,23 @@ public class NewsFeedFragment  extends ListFragment{
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
         view = inflater.inflate(R.layout.news_feed_layout, container, false);
-
-        mButtonTop = view.findViewById(R.id.top_button_id);
-
-        mButtonTop.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
         return view;
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        ListView listView = getActivity().findViewById(android.R.id.list);
+        listView = getActivity().findViewById(android.R.id.list);
+
+        mButtonTop = view.findViewById(R.id.top_button_id);
+
+        mButtonTop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listView.smoothScrollToPosition(0);
+                Toast.makeText(getContext(), "Scroll to Top", Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 }
