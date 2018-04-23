@@ -26,7 +26,8 @@ public class PostListOrganizer {
         List<Post> list = new LinkedList<>();
         for (PostEntity postEntity : db.postDAO().getAll()) {
             if (listFollowed.contains(postEntity.getUser_id())) {
-                Post post = post = getPostFromEntity(postEntity);
+                Post post = getPostFromEntity(postEntity);
+                list.add(post);
             }
         }
         return list;
@@ -59,9 +60,9 @@ public class PostListOrganizer {
                 }
 
                 if (cal1.before(cal2)) {
-                    return -1;
-                } else {
                     return 1;
+                } else {
+                    return -1;
                 }
 
             }

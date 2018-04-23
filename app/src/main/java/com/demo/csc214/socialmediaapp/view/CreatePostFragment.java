@@ -23,8 +23,10 @@ import android.widget.Toast;
 
 import com.demo.csc214.socialmediaapp.R;
 import com.demo.csc214.socialmediaapp.controller.CheckCreatePostInputs;
+import com.demo.csc214.socialmediaapp.controller.PostListOrganizer;
 import com.demo.csc214.socialmediaapp.model.Database.PostDatabase;
 import com.demo.csc214.socialmediaapp.model.Entities.PostEntity;
+import com.demo.csc214.socialmediaapp.model.Post.Post;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -109,6 +111,7 @@ public class CreatePostFragment extends Fragment{
                     post.setText(postText.getText().toString());
                     post.setPostURL(urlPost.getText().toString());
 
+
                     //Source: https://stackoverflow.com/questions/8654990/how-can-i-get-current-date-in-android
                     Date c = Calendar.getInstance().getTime();
 
@@ -118,6 +121,11 @@ public class CreatePostFragment extends Fragment{
                     post.setPostDate(formattedDate);
 
                     PostDatabase.getInstance(getContext()).postDAO().insertAll(post);
+
+                    for (PostEntity postEntity : PostDatabase.getInstance(getContext()).postDAO().getAll()) {
+                        Post p = PostListOrganizer.getPostFromEntity(postEntity);
+                        Log.i("Current Post", p.toString());
+                    }
 
                     Log.i("Size of Database", Integer.toString(PostDatabase.getInstance(getContext()).postDAO().getAll().size()));
 

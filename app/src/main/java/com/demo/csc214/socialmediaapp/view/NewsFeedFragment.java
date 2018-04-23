@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.demo.csc214.socialmediaapp.R;
@@ -37,6 +38,8 @@ public class NewsFeedFragment  extends ListFragment{
 
     public final String USERID_KEY = "USER_ID_KEY";
 
+    Button mButtonTop;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -50,6 +53,11 @@ public class NewsFeedFragment  extends ListFragment{
         }
 
         List<Integer> listFollowed = FollowTableModify.getListOfFollowers(user_id, FollowerDatabase.getInstance(getContext()));
+
+        for (int i : listFollowed) {
+            Log.i("Currently Follow", Integer.toString(i));
+        }
+
         List<Post> listPosts = PostListOrganizer.getListOfPosts(listFollowed, PostDatabase.getInstance(getContext()));
 
         Log.i("Post List Length", Integer.toString(listPosts.size()));
@@ -79,6 +87,16 @@ public class NewsFeedFragment  extends ListFragment{
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
         view = inflater.inflate(R.layout.news_feed_layout, container, false);
+
+        mButtonTop = view.findViewById(R.id.top_button_id);
+
+        mButtonTop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
         return view;
     }
 

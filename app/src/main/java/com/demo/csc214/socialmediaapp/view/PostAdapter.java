@@ -66,7 +66,7 @@ public class PostAdapter extends ArrayAdapter<Post> {
         dateText.setText(post.getPostDate());
         urlText.setText(post.getPostURL());
 
-        String[] args = PostQuery.getFirstLast(user_id, ProfileDatabase.getInstance(getContext()));
+        String[] args = PostQuery.getFirstLast(post.getUser_id(), ProfileDatabase.getInstance(getContext()));
 
         firstNameText.setText(args[0]);
         lastNameText.setText(args[1]);
