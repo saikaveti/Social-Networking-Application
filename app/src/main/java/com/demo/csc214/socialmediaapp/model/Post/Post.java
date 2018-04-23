@@ -71,4 +71,8 @@ public class Post {
         }
     }
 
+    public String toString() {
+        return "ID: " + user_id + "PostURL: " + postURL + "Image: " + imagePath + "Post Date: " + postDate + "Text: " + text;
+    }
+
 }

@@ -10,12 +10,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.demo.csc214.socialmediaapp.R;
 import com.demo.csc214.socialmediaapp.controller.DatabaseQueriesHandler;
 import com.demo.csc214.socialmediaapp.model.Database.ProfileDatabase;
+import com.demo.csc214.socialmediaapp.model.Post.Post;
 import com.demo.csc214.socialmediaapp.model.Profile.Profile;
 import com.demo.csc214.socialmediaapp.model.Profile.ProfileList;
 
@@ -28,6 +30,11 @@ public class ListUsersFragment extends ListFragment{
     View view;
 
     ProfileList list;
+
+    int user_id = 0;
+
+    public final String USERID_KEY = "USER_ID_KEY";
+
 
     private static final String ARG_FIRSTNAME = "firstName";
     private static final String ARG_LASTNAME = "lastName";
@@ -43,9 +50,14 @@ public class ListUsersFragment extends ListFragment{
 
         list = new ProfileList();
 
+        if (getArguments() != null) {
+            user_id = getArguments().getInt(USERID_KEY);
+            Log.i("Current User ID: ", Integer.toString(user_id));
+        }
+
         list.profileList = DatabaseQueriesHandler.getListOfProfile(ProfileDatabase.getInstance(getContext()));
 
-        ProfileAdapter adapter = new ProfileAdapter(getActivity(), R.layout.profile_list_adapter_view, list.profileList);
+        ProfileAdapter adapter = new ProfileAdapter(getActivity(), R.layout.profile_list_adapter_view, list.profileList, user_id);
 
         setListAdapter(adapter);
 
@@ -58,11 +70,18 @@ public class ListUsersFragment extends ListFragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         view = inflater.inflate(R.layout.list_user_layout, container, false);
-        ListView listView = view.findViewById(android.R.id.list);
+        return view;
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        ListView listView = getActivity().findViewById(android.R.id.list);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.i("OnClickRegistered", "REGISTER!");
                 Profile profile = (Profile) parent.getItemAtPosition(position);
 
                 Log.i("Position: ", Integer.toString(position));
@@ -70,6 +89,7 @@ public class ListUsersFragment extends ListFragment{
                 ProfileDialogFragment frag = new ProfileDialogFragment();
 
                 Bundle args = new Bundle();
+                args.putInt(USERID_KEY, user_id);
                 args.putString(ARG_FIRSTNAME, profile.getFirstName());
                 args.putString(ARG_LASTNAME, profile.getLastName());
                 args.putString(ARG_PROFILE, profile.getProfilePhoto());
@@ -82,12 +102,6 @@ public class ListUsersFragment extends ListFragment{
 
             }
         });
-        return view;
-    }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
 
     }
 

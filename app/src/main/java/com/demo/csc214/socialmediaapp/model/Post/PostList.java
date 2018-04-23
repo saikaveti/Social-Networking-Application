@@ -9,7 +9,7 @@ import java.util.List;
 
 public class PostList {
 
-    List<Post> postList;
+    public List<Post> postList;
 
     public PostList() {
         postList = new LinkedList<>();

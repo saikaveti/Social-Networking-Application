@@ -12,6 +12,7 @@ import android.os.Environment;
 import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -111,12 +112,14 @@ public class CreatePostFragment extends Fragment{
                     //Source: https://stackoverflow.com/questions/8654990/how-can-i-get-current-date-in-android
                     Date c = Calendar.getInstance().getTime();
 
-                    SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+                    SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
                     String formattedDate = df.format(c);
 
                     post.setPostDate(formattedDate);
 
                     PostDatabase.getInstance(getContext()).postDAO().insertAll(post);
+
+                    Log.i("Size of Database", Integer.toString(PostDatabase.getInstance(getContext()).postDAO().getAll().size()));
 
                     Toast.makeText(getContext(), "Posted!", Toast.LENGTH_SHORT).show();
 
