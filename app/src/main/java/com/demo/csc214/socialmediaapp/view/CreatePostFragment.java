@@ -24,6 +24,7 @@ import android.widget.Toast;
 import com.demo.csc214.socialmediaapp.R;
 import com.demo.csc214.socialmediaapp.controller.CheckCreatePostInputs;
 import com.demo.csc214.socialmediaapp.controller.PostListOrganizer;
+import com.demo.csc214.socialmediaapp.controller.PostQuery;
 import com.demo.csc214.socialmediaapp.model.Database.PostDatabase;
 import com.demo.csc214.socialmediaapp.model.Entities.PostEntity;
 import com.demo.csc214.socialmediaapp.model.Post.Post;
@@ -59,7 +60,7 @@ public class CreatePostFragment extends Fragment{
         super.onCreate(savedInstanceState);
 
         if (getArguments() != null) {
-            user_id = getArguments().getInt(USERID_KEY);
+            user_id = getArguments().getInt(USERID_KEY, PostQuery.currentID);
         }
     }
 

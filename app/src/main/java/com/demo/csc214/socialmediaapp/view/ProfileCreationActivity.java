@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.demo.csc214.socialmediaapp.R;
 import com.demo.csc214.socialmediaapp.controller.CheckCreateProfileElements;
+import com.demo.csc214.socialmediaapp.controller.PostQuery;
 import com.demo.csc214.socialmediaapp.model.Database.ProfileDatabase;
 import com.demo.csc214.socialmediaapp.model.Database.UserDatabase;
 import com.demo.csc214.socialmediaapp.model.Entities.ProfileEntity;
@@ -127,6 +128,8 @@ public class ProfileCreationActivity extends AppCompatActivity {
 
                     Intent myIntent = new Intent(ProfileCreationActivity.this, SocialActivity.class);
                     myIntent.putExtra(USERID_KEY, user_id);
+
+                    PostQuery.currentID = user_id;
 
                     Toast.makeText(getApplicationContext(), "Profile Created!", Toast.LENGTH_SHORT).show();
 

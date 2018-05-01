@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.demo.csc214.socialmediaapp.R;
 import com.demo.csc214.socialmediaapp.controller.DatabaseQueriesHandler;
+import com.demo.csc214.socialmediaapp.controller.PostQuery;
 import com.demo.csc214.socialmediaapp.model.Database.ProfileDatabase;
 import com.demo.csc214.socialmediaapp.model.Post.Post;
 import com.demo.csc214.socialmediaapp.model.Profile.Profile;
@@ -51,11 +52,18 @@ public class ListUsersFragment extends ListFragment{
         list = new ProfileList();
 
         if (getArguments() != null) {
-            user_id = getArguments().getInt(USERID_KEY);
+            user_id = getArguments().getInt(USERID_KEY, PostQuery.currentID);
             Log.i("Current User ID: ", Integer.toString(user_id));
         }
 
         list.profileList = DatabaseQueriesHandler.getListOfProfile(ProfileDatabase.getInstance(getContext()));
+
+        for (Profile profile : list.profileList) {
+            if (profile.getUser_id() == user_id) {
+                list.profileList.remove(profile);
+                Log.i("Analysis", "Removed!");
+            }
+        }
 
         ProfileAdapter adapter = new ProfileAdapter(getActivity(), R.layout.profile_list_adapter_view, list.profileList, user_id);
 

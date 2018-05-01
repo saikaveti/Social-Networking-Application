@@ -16,6 +16,7 @@ import com.demo.csc214.socialmediaapp.R;
 import com.demo.csc214.socialmediaapp.controller.DatabaseQueriesHandler;
 import com.demo.csc214.socialmediaapp.controller.FollowTableModify;
 import com.demo.csc214.socialmediaapp.controller.PostListOrganizer;
+import com.demo.csc214.socialmediaapp.controller.PostQuery;
 import com.demo.csc214.socialmediaapp.model.Database.FollowerDatabase;
 import com.demo.csc214.socialmediaapp.model.Database.PostDatabase;
 import com.demo.csc214.socialmediaapp.model.Database.ProfileDatabase;
@@ -50,7 +51,7 @@ public class NewsFeedFragment  extends ListFragment{
         list = new PostList();
 
         if (getArguments() != null) {
-            user_id = getArguments().getInt(USERID_KEY);
+            user_id = getArguments().getInt(USERID_KEY, PostQuery.currentID);
             Log.i("Current User ID: ", Integer.toString(user_id));
         }
 
@@ -59,6 +60,8 @@ public class NewsFeedFragment  extends ListFragment{
         for (int i : listFollowed) {
             Log.i("Currently Follow", Integer.toString(i));
         }
+
+        //listFollowed.add(user_id);
 
         List<Post> listPosts = PostListOrganizer.getListOfPosts(listFollowed, PostDatabase.getInstance(getContext()));
 

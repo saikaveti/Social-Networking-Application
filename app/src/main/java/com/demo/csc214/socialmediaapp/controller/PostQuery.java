@@ -9,6 +9,8 @@ import com.demo.csc214.socialmediaapp.model.Entities.ProfileEntity;
 
 public class PostQuery {
 
+    public static int currentID;
+
     public static String[] getFirstLast(int user_id, ProfileDatabase db) {
         String[] args = new String[2];
         for (ProfileEntity profileEntity : db.profileDao().getAll()) {

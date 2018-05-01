@@ -25,6 +25,7 @@ import android.widget.Toast;
 import com.demo.csc214.socialmediaapp.R;
 import com.demo.csc214.socialmediaapp.controller.CheckCreateProfileElements;
 import com.demo.csc214.socialmediaapp.controller.DatabaseQueriesHandler;
+import com.demo.csc214.socialmediaapp.controller.PostQuery;
 import com.demo.csc214.socialmediaapp.model.Database.ProfileDatabase;
 import com.demo.csc214.socialmediaapp.model.Database.UserDatabase;
 import com.demo.csc214.socialmediaapp.model.Entities.ProfileEntity;
@@ -66,7 +67,7 @@ public class EditProfileFragment extends Fragment{
         super.onCreate(savedInstanceState);
 
         if (getArguments() != null) {
-            user_id = getArguments().getInt(USERID_KEY);
+            user_id = getArguments().getInt(USERID_KEY, PostQuery.currentID);
             Log.i("Current User ID: ", Integer.toString(user_id));
         }
 
@@ -158,6 +159,8 @@ public class EditProfileFragment extends Fragment{
 
 
                     ProfileEntity insertEntity = new ProfileEntity();
+
+                    insertEntity.setUser_id(user_id);
 
                     insertEntity.setProfilePhoto(currentImageFile);
                     insertEntity.setFirstName(mFirstNameBox.getText().toString());
